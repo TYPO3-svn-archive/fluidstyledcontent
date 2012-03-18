@@ -61,7 +61,7 @@ class Tx_Fluidstyledcontent_ViewHelpers_Html5_TimeViewHelper extends Tx_Fluid_Co
 		if ($this->arguments['dateOnly']) {
 			$this->tag->addAttribute('datetime', $this->arguments['date']->format('Y-m-d'));
 		} else {
-			$this->tag->addAttribute('datetime', $this->arguments['date']->format('c'));
+			$this->tag->addAttribute('datetime', $this->arguments['date']->format(DateTime::W3C));
 		}
 
 		if ($this->arguments['dateValue']) {

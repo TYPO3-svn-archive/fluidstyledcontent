@@ -84,7 +84,7 @@ class Tx_Fluidstyledcontent_ViewHelpers_Data_ContentElementViewHelper extends Tx
 	 * @return DateTime
 	 */
 	private function convertTimestampToDateTime($ts) {
-		$ts = date('c', $ts); // respect local timezone
+		$ts = date(DateTime::W3C, $ts); // respect local timezone
 		$converter = new Tx_Extbase_Property_TypeConverter_DateTimeConverter();
 		$ts = $converter->convertFrom($ts, 'DateTime');
 		
