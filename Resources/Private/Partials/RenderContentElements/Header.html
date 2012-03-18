@@ -1,0 +1,76 @@
+{namespace fed=Tx_Fed_ViewHelpers}
+{namespace fsc=Tx_Fluidstyledcontent_ViewHelpers}
+
+<f:comment>
+	Do not render the header if it should be hidden.
+	By default it is layout = 100. We just render the known default layouts (0=default, 1, 2, 3, 4, 5 & 100).
+</f:comment>
+
+<f:if condition="{layout} <= 5">
+	<f:if condition="{date}">
+		<f:then>
+			<f:if condition="{date}">
+				<f:then>
+					<header>
+						<f:render section="headerAndSubheadertAndDate" arguments="{header: header, subheader: subheader, layout: layout, link: link, position: position, date: date}" />
+					</header>
+				</f:then>
+				<f:else>
+					<f:render section="headerAndSubheadertAndDate" arguments="{header: header, subheader: subheader, layout: layout, link: link, position: position, date: date}" />
+				</f:else>
+			</f:if>
+		</f:then>
+		<f:else>
+			<f:render section="headerAndSubheadert" arguments="{header: header, subheader: subheader, layout: layout, link: link, position: position}" />
+		</f:else>
+	</f:if>
+</f:if>
+
+
+
+
+<f:section name="headerAndSubheadertAndDate">
+	<f:render section="headerAndSubheadert" arguments="{header: header, subheader: subheader, layout: layout, link: link, position: position}" />
+	<fsc:html5.time date="{date}" format="F d, Y" dateOnly="TRUE" />
+</f:section>
+
+<f:section name="headerAndSubheadert">
+	<f:if condition="{layout} == 0">
+		<fed:data.var name="layout" value="1" />
+	</f:if>
+	<fed:data.var name="tag" value="h{layout}" />
+	
+	<f:if condition="{subheader}">
+		<f:then>
+			<hgroup>
+				<f:render section="header" arguments="{tag: tag, header: header, link: link, position: position}" />
+				<fed:math as="layout" expression="{layout} + 1" />
+				<![CDATA[<h]]>{layout}><f:format.htmlspecialchars value="{subheader}" /><![CDATA[</h]]>{layout}>
+			</hgroup>
+		</f:then>
+		<f:else>
+			<f:render section="header" arguments="{tag: tag, header: header, link: link, position: position}" />
+		</f:else>
+	</f:if>
+</f:section>
+
+<f:section name="header">
+	<{tag}
+		<f:if condition="{position}">
+			class="align-{position}"
+		</f:if>
+	>
+		<f:if condition="{link}">
+			<f:then>
+				<f:link.page pageUid="{link}"><f:render section="headerText" arguments="{header: header}" /></f:link.page>
+			</f:then>
+			<f:else>
+				<f:render section="headerText" arguments="{header: header}" />
+			</f:else>
+		</f:if>
+	</{tag}>
+</f:section>
+
+<f:section name="headerText">
+	<f:format.htmlspecialchars value="{header}" />
+</f:section>

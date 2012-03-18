@@ -1,0 +1,79 @@
+{namespace fed=Tx_Fed_ViewHelpers}
+{namespace fsc=Tx_Fluidstyledcontent_ViewHelpers}
+
+<f:for each="{contentElements}" as="ce">
+	<fsc:data.contentElement as="ce" uid="{ce.uid}" />
+	
+	<f:if condition="{ce.section_frame} == 66">
+		<f:then>
+			<f:if condition="{ce.before}">
+				<![CDATA[<div style="margin-top:]]> {ce.before} <![CDATA[px"></div>]]>
+			</f:if>
+			<![CDATA[<a id="c]]>{ce.uid}<![CDATA["></a>]]>
+			<f:render section="{ce.CType}" />
+			<f:if condition="{ce.after}">
+				<![CDATA[<div style="margin-bottom:]]>{ce.after}<![CDATA[px"></div>]]>
+			</f:if>
+		</f:then>
+		<f:else>
+			<f:if condition="{ce.CType} == 'menu'">
+				<f:then>
+					<fed:data.var name="containerTag" value="nav" />
+				</f:then>
+				<f:else>
+					<fed:data.var name="containerTag" value="div" />
+				</f:else>
+			</f:if>
+
+			<fed:switch value="{ce.section_frame}">
+				<fed:case case="1" break="TRUE">
+					<fed:data.var name="cssClass" value="invisible" />
+				</fed:case>
+				<fed:case case="5" break="TRUE">
+					<fed:data.var name="cssClass" value="rulerBefore" />
+				</fed:case>
+				<fed:case case="6" break="TRUE">
+					<fed:data.var name="cssClass" value="rulerAfter" />
+				</fed:case>
+				<fed:case case="11" break="TRUE">
+					<fed:data.var name="cssClass" value="indent3366" />
+				</fed:case>
+				<fed:case case="12" break="TRUE">
+					<fed:data.var name="cssClass" value="indent6633" />
+				</fed:case>
+				<fed:case case="20" break="TRUE">
+					<fed:data.var name="cssClass" value="frame1" />
+				</fed:case>
+				<fed:case case="21" break="TRUE">
+					<fed:data.var name="cssClass" value="frame2" />
+				</fed:case>
+			</fed:switch>
+			
+			<![CDATA[<div id="c]]>{ce.uid}"
+			
+			<f:if condition="{cssClass}">
+				class="{cssClass}"
+			</f:if>
+			<f:if condition="{ce.before} && {ce.after}">
+				<f:then>
+					style="margin-top:{ce.before}px;margin-bottom:{ce.after}px"
+				</f:then>
+				<f:else>
+					<f:if condition="{ce.before}">
+						<f:then>
+							style="margin-top:{ce.before}px"
+						</f:then>
+						<f:else>
+							style="margin-bottom:{ce.after}px"
+						</f:else>
+					</f:if>
+				</f:else>
+			</f:if>
+
+			>
+			<f:render section="{ce.CType}" />
+			<![CDATA[</div>]]>
+		</f:else>
+	</f:if>
+
+</f:for>
