@@ -1,0 +1,16 @@
+{namespace fed=Tx_Fed_ViewHelpers}
+
+<f:comment>
+	Do not render the header if it should be hidden.
+	By default it is layout = 100. We just render the known default layouts (0=default, 1, 2, 3, 4, 5 & 100).
+</f:comment>
+
+<f:if condition="{content}">
+	<ul class="bulletlist-{field:layout}">
+		<f:for each="{fed:explode(content: content, glue: 'constant:LF')}" as="li">
+			<f:cycle values="{0: 'odd', 1: 'even'}" as="oddEven">
+				<li class="{oddEven}"><f:format.html parseFuncTSPath="lib.parseFunc">{li}</f:format.html></li>
+			</f:cycle>
+		</f:for>
+	</ul>
+</f:if>

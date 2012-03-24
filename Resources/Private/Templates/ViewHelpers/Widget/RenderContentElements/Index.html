@@ -4,3 +4,21 @@
 <f:section name="header">
 	<f:render partial="RenderContentElements/Header" arguments="{header: ce.header, subheader: ce.subheader, position: ce.header_position, link: ce.header_link, layout: ce.header_layout, date:ce.date}" />
 </f:section>
+
+<f:section name="text">
+	<f:render partial="RenderContentElements/Header" arguments="{header: ce.header, subheader: ce.subheader, position: ce.header_position, link: ce.header_link, layout: ce.header_layout, date:ce.date}" />
+	<f:format.html>{ce.bodytext}</f:format.html>
+</f:section>
+
+<f:section name="bullets">
+	<f:render partial="RenderContentElements/Header" arguments="{header: ce.header, subheader: ce.subheader, position: ce.header_position, link: ce.header_link, layout: ce.header_layout, date:ce.date}" />
+	<f:render partial="RenderContentElements/Bullets" arguments="{content: ce.bodytext, layout:ce.layout}" />
+</f:section>
+
+<f:section name="html">
+	<f:format.raw>{ce.bodytext}</f:format.raw>
+</f:section>
+
+<f:section name="div">
+	<div class="divider"><hr></div>
+</f:section>

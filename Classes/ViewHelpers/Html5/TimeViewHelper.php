@@ -49,7 +49,7 @@ class Tx_Fluidstyledcontent_ViewHelpers_Html5_TimeViewHelper extends Tx_Fluid_Co
 		$this->registerArgument('date', 'DateTime', 'The DateTime object that should be rendered', TRUE);
 		$this->registerArgument('dateOnly', 'boolean', 'Wheather the datetime attribute should contain only the date, not the complete DateTime.', FALSE);
 		$this->registerArgument('format', 'string', 'How to format the date for the visible output.', FALSE, 'Y-m-d H:i:s');
-		$this->registerArgument('dateValue', 'string', 'If set the given string will be wrapped by the time tag. No DateTime value will be visible the user, only the given string.', FALSE);
+		$this->registerArgument('dateValue', 'string', 'If set the given string will be wrapped by the time tag. No DateTime value will be visible to the user, only the given string.', FALSE);
 	}
 
 	/**

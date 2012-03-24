@@ -7,9 +7,13 @@
 	<f:if condition="{ce.section_frame} == 66">
 		<f:then>
 			<f:if condition="{ce.before}">
-				<![CDATA[<div style="margin-top:]]> {ce.before} <![CDATA[px"></div>]]>
+				<f:then>
+					<![CDATA[<div style="margin-top:]]> {ce.before} <![CDATA[px" id="c]]>{ce.uid}<![CDATA["></div>]]>
+				</f:then>
+				<f:else>
+					<![CDATA[<a id="c]]>{ce.uid}<![CDATA["></a>]]>
+				</f:else>
 			</f:if>
-			<![CDATA[<a id="c]]>{ce.uid}<![CDATA["></a>]]>
 			<f:render section="{ce.CType}" />
 			<f:if condition="{ce.after}">
 				<![CDATA[<div style="margin-bottom:]]>{ce.after}<![CDATA[px"></div>]]>
